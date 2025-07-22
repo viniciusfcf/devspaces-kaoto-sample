@@ -24,9 +24,7 @@ components:
       env:
         - name: KUBEDOCK_PARAMS
           value: "--reverse-proxy --kubeconfig /home/user/.kube/config --initimage quay.io/agiertli/kubedock:0.13.0"
-        - name: USE_JAVA21
-          value: "true"
-        - value: /home/jboss/.m2
+        - value: /home/user/.m2
           name: MAVEN_CONFIG
         - value: -Xmx4G -Xss128M -XX:MetaspaceSize=1G -XX:MaxMetaspaceSize=2G
           name: MAVEN_OPTS
@@ -89,6 +87,14 @@ commands:
       group:
         kind: run
         isDefault: true
+  - id: set-java-21-default
+    exec:
+      label: "Set default Java version to 21"
+      component: tools
+      commandLine: "sdk default java 21.0.5-tem"
+      workingDir: "/home/user"
+      group:
+        kind: build
   - id: configure-quarkus-cli
     exec:
       label: "Configure Quarkus CLI"
@@ -97,6 +103,7 @@ commands:
       workingDir: "/home/user"
       group:
          kind: build
-events:
-  postStart:
-    - configure-quarkus-cli
+# events:
+#   postStart:
+#     - set-java-21-default
+#     - configure-quarkus-cli
