@@ -1,0 +1,41 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "hello-kaoto"
+  description: "A cool quarkus app"
+  annotations:
+    argocd/app-selector: rht-gitops.com/janus-argocd=hello-kaoto-bootstrap
+    backstage.io/kubernetes-id: hello-kaoto
+    janus-idp.io/tekton: hello-kaoto
+    backstage.io/source-location: url:https://gitlab-gitlab.apps.cluster-9kqms.9kqms.sandbox1837.opentlc.com/development/hello-kaoto
+    backstage.io/techdocs-ref: url:https://gitlab-gitlab.apps.cluster-9kqms.9kqms.sandbox1837.opentlc.com/development/hello-kaoto
+    gitlab.com/project-slug: development/hello-kaoto
+    quay.io/repository-slug: "quayadmin/hello-kaoto"
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://devspaces.apps.cluster-9kqms.9kqms.sandbox1837.opentlc.com/#https://gitlab-gitlab.apps.cluster-9kqms.9kqms.sandbox1837.opentlc.com/development/hello-kaoto
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+    - url: https://devspaces.apps.cluster-9kqms.9kqms.sandbox1837.opentlc.com/#https://gitlab-gitlab.apps.cluster-9kqms.9kqms.sandbox1837.opentlc.com/development/hello-kaoto?che-editor=che-incubator/che-idea/latest
+      title: OpenShift Dev Spaces (JetBrains IntelliJ)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user1"
+  providesApis:
+    - "hello-kaoto"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: "hello-kaoto"
+  description: "A cool quarkus app"
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "user1"
+  definition:
+    $text: ./openapi.yaml

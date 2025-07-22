@@ -1,0 +1,22 @@
+- route:
+    id: route-2171
+    from:
+      id: from-1137
+      uri: rest
+      parameters:
+        method: get
+        path: /ordens
+      steps:
+        - to:
+            id: to-1819
+            uri: log:InfoLogger
+            parameters: {}
+        - setBody:
+            id: setBody-3389
+            constant:
+              expression: Hi Kaoto!
+        - to:
+            id: to-8301
+            uri: log
+            parameters:
+              loggerName: output
