@@ -1,0 +1,1 @@
+# devspaces-kaoto-sample
